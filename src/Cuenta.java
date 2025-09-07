@@ -49,7 +49,7 @@ public Class Cuenta{
         return llaveCodigo + "," + username + "," + nivel + "," + equipo;
     }
 
-    public void agregarCuenta(Cuenta c){
+    public static void agregarCuenta(Cuenta c){
         File archivo = new File("cuentas.csv");
 
         try (FileWriter fw = new FileWriter(archivo, true);
@@ -66,7 +66,7 @@ public Class Cuenta{
         }
     }
 
-    public String consultarCuenta(String llaveCodigo){
+    public static String consultarCuenta(String llaveCodigo){
         File archivo = new File("cuentas.csv");
         if (!archivo.exists()) {
             System.out.println("Aún no hay cuentas almacenadas D:");
@@ -86,8 +86,19 @@ public Class Cuenta{
             System.out.println("Hubo un error u.u");
             e.printStackTrace();
         }
-        return null; // no se encontro la cuenta
+        System.out.println("No se encontró una cuenta con la llave " + llaveCodigo);
+        return null;
     }
+
+    public static void editarCuenta(que se le pone aqui, igual la llave? D:){
+        ewoiigfhksijifikskksksksk
+    } 
+
+    public static void eliminarCuenta(){
+        //TODOS
+    }
+
+
 
 
 }
