@@ -113,7 +113,7 @@ public class Participantes{
     }
 
     public String toCSV() {
-        // Convertir array de correos a string separado por punto y coma
+        // Convertir array de correos a strings con ;
         String correosStr = String.join(";", mails);
         // obtenemos la llave de la cuenta para guardarla en el archivo
         String cuentaLlave = (cuenta != null) ? cuenta.getLlaveCodigo() : "";
@@ -183,7 +183,7 @@ public class Participantes{
             int birthdate = Integer.parseInt(partes[3].trim());
             int edad = Integer.parseInt(partes[4].trim());
             
-            // Parsear correos (separados por ;)
+            // Parsear correos a arreglos
             String[] mails = partes[5].trim().split(";");
             
             int numCuenta = Integer.parseInt(partes[6].trim());
@@ -192,10 +192,10 @@ public class Participantes{
             String cuentaLlave = partes[9].trim();
             Cuenta cuenta = null;
             if(!cuentaLlave.isEmpty()){
-                
+                cuenta = Cuenta.consultarCuentaI(cuentaLlave);
             }
             return new Participantes(nombre, apellidoP, apellidoM, birthdate, 
-                                   edad, mails, numCuenta, facultad, carrera, cuentaLlave);
+                                   edad, mails, numCuenta, facultad, carrera, cuenta);
             
         } catch (Exception e) {
             System.err.println("Error al parsear línea CSV: " + linea);
