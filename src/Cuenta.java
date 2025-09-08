@@ -52,10 +52,11 @@ public class Cuenta{
 
     public static void agregarCuenta(Cuenta c){
         File archivo = new File("cuentas.csv");
-
+        boolean yaExiste = archivo.exists();
+        
         try (FileWriter fw = new FileWriter(archivo, true);
             BufferedWriter bw = new BufferedWriter(fw)){
-            if(!archivo.exists()){
+            if(!yaExiste){
                 bw.write(encabezado);
                 bw.newLine();
             }
