@@ -108,7 +108,7 @@ public class Participantes{
                 ", numCuenta=" + numCuenta +
                 ", facultad='" + facultad + '\'' +
                 ", carrera='" + carrera + '\'' +
-                ", cuenta=" + cuenta +
+                ", cuenta=" + cuenta.getLlaveCodigo() +
                 '}';
     }
 
@@ -236,7 +236,7 @@ public class Participantes{
         return false;
     }
 
-    // Método para guardar todos los participantes (usado en edición y eliminación)
+    // Método para guardar todos los participantes para edición y eliminación
     private static boolean guardarTodosParticipantes(List<Participantes> participantes) {
         try (PrintWriter out = new PrintWriter(new FileWriter(archivo))) {
             out.println(encabezado);
@@ -266,8 +266,4 @@ public class Participantes{
         return null;
     }
 
-    // Método para verificar si un número de cuenta ya existe
-    public static boolean existeNumCuenta(int numCuenta) {
-        return buscarPorNumCuenta(numCuenta) != null;
-    }
 }
