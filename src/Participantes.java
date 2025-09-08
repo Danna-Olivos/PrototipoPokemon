@@ -270,7 +270,7 @@ public class Participantes{
         try {
             String[] partes = linea.split(",");
             
-            if (partes.length < 12) {
+            if (partes.length < 11) {
                 System.err.println("Línea CSV incompleta: " + linea);
                 return null;
             }
@@ -290,11 +290,10 @@ public class Participantes{
             int numCuenta = Integer.parseInt(partes[8].trim());
             String facultad = partes[9].trim();
             String carrera = partes[10].trim();
-            String cuentaLlave = partes[11].trim();
-            Cuenta cuenta = null;
-            if(!cuentaLlave.isEmpty()){
-                cuenta = Cuenta.consultarCuentaI(cuentaLlave);
-            }
+	    Cuenta cuenta = null;
+	    if(partes.length > 11 && !partes[11].trim().isEmpty()){
+            	cuenta = Cuenta.consultarCuenta(partes[11].trim());
+	    }
             return new Participantes(nombre, apellidoP, apellidoM, birthdate, 
                                    edad,sexo,telefonos, mails, numCuenta, facultad, carrera, cuenta);
             
