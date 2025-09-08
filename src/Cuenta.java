@@ -1,6 +1,6 @@
 import java.io.*;
 
-public Class Cuenta{
+public class Cuenta{
 
     private static String archivo = "cuentas.csv";
     private static String encabezado = "códigoEntreandor,username,nivel,equipo";
