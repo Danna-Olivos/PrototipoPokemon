@@ -53,6 +53,11 @@ public class Cuenta{
     public static void agregarCuenta(Cuenta c){
         File archivo = new File("cuentas.csv");
         boolean yaExiste = archivo.exists();
+
+        if(yaExiste && (consultarCuenta(c.getLlaveCodigo()) != null)){
+            System.out.println("Esa cuenta ya está registrada");
+            return;
+        }
         
         try (FileWriter fw = new FileWriter(archivo, true);
             BufferedWriter bw = new BufferedWriter(fw)){
