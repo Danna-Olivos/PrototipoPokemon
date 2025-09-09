@@ -4,23 +4,61 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * La clase <code>Participantes</code> modela a un participante del sistema.
+ * 
+ * Cada participante tiene un nombre, apellidos, fecha de nacimiento, edad, sexo,
+ * teléfonos, correos electrónicos, número de cuenta (que funciona como llave),
+ * facultad, carrera y una cuenta asociada de tipo {@link Cuenta}.
+ * 
+ * La información de los participantes se almacena en un archivo CSV.
+ */
 public class Participantes{
-    
+    /** Nombre del archivo CSV donde se almacenan los participantes. */
     private static String archivo = "participantes.csv";  
+    /** Encabezado del archivo CSV. */
     private static String encabezado = "nombre, apellidoP, apellidoM, fecha, edad, sexo, telefonos, correo, numCuenta, facultad, carrera, pokemonCuenta";
+    /** Nombre del participante. */
     private String nombre;
+    /** Apellido paterno del participante. */
     private String apellidoP;
+    /** Apellido materno del participante. */
     private String apellidoM;  
+    /** Fecha de nacimiento del participante (representada como entero). */
     private int birthdate;
+    /** Edad del participante. */
     private int edad;
+    /** Sexo del participante. */
     private String sexo;
+    /** Números de teléfono del participante. */
     private int[] telefonos;
+    /** Correos electrónicos del participante. */
     private String[] mails;
-    private int numCuenta; //esta va a ser la llave
+    /** Número de cuenta único (llave primaria). */
+    private int numCuenta;
+    /** Facultad a la que pertenece el participante. */
     private String facultad;
+    /** Carrera que estudia el participante. */
     private String carrera;
+    /** Cuenta asociada del participante. */
     private Cuenta cuenta;
 
+    /**
+     * Constructor para la clase <code>Participantes</code>.
+     *
+     * @param nombre nombre
+     * @param apellidoP apellido paterno
+     * @param apellidoM apellido materno
+     * @param birthdate fecha de nacimiento
+     * @param edad edad
+     * @param sexo sexo
+     * @param telefonos teléfonos
+     * @param mails correos electrónicos
+     * @param numCuenta número de cuenta único
+     * @param facultad facultad
+     * @param carrera carrera
+     * @param cuenta cuenta de Pokémon asociada
+     */
     public Participantes(String nombre, String apellidoP,String apellidoM,
                          int birthdate, int edad, String sexo, int[] telefonos, String[]mails,
                          int numCuenta, String facultad,
@@ -40,79 +78,83 @@ public class Participantes{
         this.cuenta = cuenta;
     }
 
-    public String getNombre(){
-        return nombre;
-    }
-    public void setNombre(String nombre){
-        this.nombre = nombre;
-    }
-    public String getApellidoP(){
-        return apellidoP;
-    }
-    public void setApellidoP(String apellidoP){
-        this.apellidoP = apellidoP;
-    }
-    public String getApellidoM(){
-        return apellidoM;
-    }
-    public void setApellidoM(String apellidoM){
-        this.apellidoM = apellidoM;
-    }
-    public int getEdad(){
-        return edad;
-    }
-    public void setEdad(int edad){
-        this.edad = edad;
-    }
-    public String getSexo(){
-        return sexo;
-    }
-    public void setSexo(String sexo){
-        this.sexo = sexo;
-    }
-    public int[] getTelefonos(){
-        return telefonos;
-    }
-    public void setTelefonos(int[] telefonos){
-        this.telefonos = telefonos;
-    }
-    public String[] getMails(){
-        return mails;
-    }
-    public void setMails(String[] mails) {
-        this.mails = mails;
-    }
-    public int getBirthdate(){
-        return birthdate;
-    }
-    public void setBirthdate(int birthdate){
-        this.birthdate = birthdate;
-    }
-    public int getNumDeCuenta(){
-        return numCuenta;
-    }
-    public void setNumDeCuenta(int numCuenta){
-        this.numCuenta = numCuenta;
-    }
-    public String getFacultad(){
-        return facultad;
-    }
-    public void setFacultad(String facultad){
-        this.facultad = facultad;
-    }
-    public String getCarrera(){
-        return carrera;
-    }
-    public void setCarrera(String carrera){
-        this.carrera = carrera;
-    }
-    public Cuenta getCuenta(){
-        return cuenta;
-    }
-    public void setCuenta(Cuenta cuenta){
-        this.cuenta = cuenta;
-    }
+    /** @return el nombre del participante */
+    public String getNombre(){ return nombre; }
+    
+    /** @param nombre nuevo nombre del participante */
+    public void setNombre(String nombre){ this.nombre = nombre; }
+    
+    /** @return el apellido paterno */
+    public String getApellidoP(){ return apellidoP; }
+    
+    /** @param apellidoP nuevo apellido paterno */
+    public void setApellidoP(String apellidoP){ this.apellidoP = apellidoP; }
+    
+    /** @return el apellido materno */
+    public String getApellidoM(){ return apellidoM; }
+    
+    /** @param apellidoM nuevo apellido materno */
+    public void setApellidoM(String apellidoM){ this.apellidoM = apellidoM; }
+    
+    /** @return la edad */
+    public int getEdad(){ return edad; }
+    
+    /** @param edad nueva edad */
+    public void setEdad(int edad){ this.edad = edad; }
+    
+    /** @return el sexo */
+    public String getSexo(){ return sexo; }
+    
+    /** @param sexo nuevo sexo */
+    public void setSexo(String sexo){ this.sexo = sexo; }
+    
+    /** @return los teléfonos */
+    public int[] getTelefonos(){ return telefonos; }
+    
+    /** @param telefonos nuevos teléfonos */
+    public void setTelefonos(int[] telefonos){ this.telefonos = telefonos; }
+    
+    /** @return los correos electrónicos */
+    public String[] getMails(){ return mails; }
+    
+    /** @param mails nuevos correos electrónicos */
+    public void setMails(String[] mails) { this.mails = mails; }
+    
+    /** @return la fecha de nacimiento */
+    public int getBirthdate(){ return birthdate; }
+    
+    /** @param birthdate nueva fecha de nacimiento */
+    public void setBirthdate(int birthdate){ this.birthdate = birthdate; }
+    
+    /** @return el número de cuenta */
+    public int getNumDeCuenta(){ return numCuenta; }
+    
+    /** @param numCuenta nuevo número de cuenta */
+    public void setNumDeCuenta(int numCuenta){ this.numCuenta = numCuenta; }
+    
+    /** @return la facultad */
+    public String getFacultad(){ return facultad; }
+    
+    /** @param facultad nueva facultad */
+    public void setFacultad(String facultad){ this.facultad = facultad; }
+    
+    /** @return la carrera */
+    public String getCarrera(){ return carrera; }
+    
+    /** @param carrera nueva carrera */
+    public void setCarrera(String carrera){ this.carrera = carrera; }
+    
+    /** @return la cuenta asociada */
+    public Cuenta getCuenta(){ return cuenta; }
+    
+    /** @param cuenta nueva cuenta asociada */
+    public void setCuenta(Cuenta cuenta){ this.cuenta = cuenta; }
 
+    /**
+     * Convierte al participante en formato CSV.
+     *
+     * @return una cadena con todos los atributos separados por comas
+     */
     public String toCSV() {
         String telefonosStr = Arrays.stream(telefonos)
                                .mapToObj(String::valueOf)
@@ -126,7 +168,12 @@ public class Participantes{
                 correosStr, numCuenta, facultad, carrera, cuentaLlave);
     }
 
-    // Método para agregar participante al archivo
+    /**
+     * Agrega un nuevo participante al archivo CSV.
+     * Verifica que no exista previamente un participante con el mismo número de cuenta.
+     *
+     * @param p el participante a agregar
+     */
     public static void AddParticipante(Participantes p) {
         try (FileWriter fw = new FileWriter(archivo, true);
              BufferedWriter bw = new BufferedWriter(fw);
@@ -146,7 +193,12 @@ public class Participantes{
             System.err.println("Error al agregar participante: " + e.getMessage());
         }
     }
-    // Método para verificar si un número de cuenta ya existe
+
+    /**
+     * Metodo auxiliar para verificar si un número de cuenta ya existe
+     * 
+     * @param numCuenta el numero de cuenta del participante
+     */
     private static boolean existeNumCuenta(int numCuenta) {
         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
             String linea;
@@ -177,7 +229,12 @@ public class Participantes{
         
         return false;
     }
-    // Método para leer todos los participantes del archivo
+    
+    /**
+     * Lee todos los participantes del archivo CSV.
+     *
+     * @return la lista de participantes
+     */
     public static List<Participantes> leerParticipantes() {
         List<Participantes> participantes = new ArrayList<>();
         
@@ -204,7 +261,11 @@ public class Participantes{
         return participantes;
     }
 
-    // Método para parsear una línea CSV a objeto Participantes
+    /**
+     * Metodo auxiliar para parsear una línea CSV a objeto Participantes
+     * @param linea linea a parsear
+     * @return el participante
+     */
     private static Participantes parsearLineaCSV(String linea) {
         try {
             String[] partes = linea.split(",");
@@ -244,7 +305,13 @@ public class Participantes{
         }
     }
 
-    // Método para editar un participante existente
+    /**
+     * Edita un participante existente identificado por su número de cuenta.
+     *
+     * @param numCuenta número de cuenta del participante a editar
+     * @param nuevo objeto participante con los nuevos datos
+     * @return <code>true</code> si se editó correctamente, <code>false</code> si no se encontró
+     */
     public static boolean editarParticipante(int numCuenta, Participantes nuevo) {
         List<Participantes> participantes = leerParticipantes();
         boolean encontrado = false;
@@ -264,7 +331,12 @@ public class Participantes{
         return false;
     }
 
-    // Método para eliminar un participante
+    /**
+     * Elimina un participante del archivo CSV.
+     *
+     * @param numCuenta número de cuenta del participante a eliminar
+     * @return <code>true</code> si se eliminó, <code>false</code> si no se encontró
+     */
     public static boolean eliminarParticipante(int numCuenta) {
         List<Participantes> participantes = leerParticipantes();
         boolean encontrado = participantes.removeIf(p -> p.getNumDeCuenta() == numCuenta);
@@ -276,7 +348,11 @@ public class Participantes{
         return false;
     }
 
-    // Método para guardar todos los participantes para edición y eliminación
+    /**
+     * Método auxiliar para guardar todos los participantes para edición y eliminación
+     * @param participantes la lista de participantes
+     * @return <code>true</code> si se guardaron los participantes, <code>false</code> en caso contrario.
+     */
     private static boolean guardarTodosParticipantes(List<Participantes> participantes) {
         try (PrintWriter out = new PrintWriter(new FileWriter(archivo))) {
             out.println(encabezado);
@@ -293,7 +369,12 @@ public class Participantes{
         }
     }
 
-    // Método para buscar participante por número de cuenta
+    /**
+     * Busca un participante por número de cuenta en el archivo CSV.
+     *
+     * @param numCuenta número de cuenta del participante
+     * @return el participante si se encuentra, <code>null</code> en caso contrario
+     */
     public static Participantes buscarPorNumCuenta(int numCuenta) {
         List<Participantes> participantes = leerParticipantes();
         
@@ -305,5 +386,4 @@ public class Participantes{
         
         return null;
     }
-
 }
