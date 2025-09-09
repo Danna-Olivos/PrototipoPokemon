@@ -47,8 +47,8 @@ public class Pokemon {
      * @param sexo sexo
      * @param esShiny indica si el Pokémon es shiny
      */
-    public Pokemon(String idPokemon, String nombre, String especie, String tipo, int cp, int peso,String sexo, boolean esShiny) {
-        this.idPokemon = idPokemon;
+    public Pokemon(String nombre, String especie, String tipo, int cp, int peso,String sexo, boolean esShiny) {
+        this.idPokemon = Pokemon.generarID();
         this.nombre = nombre;
         this.especie = especie;
         this.tipo = tipo;
@@ -291,4 +291,15 @@ public class Pokemon {
             System.out.println("Error al escribir el archivo: " + e.getMessage());
         }
     }   
+
+      /**
+     * Genera un identificador unico mediante la union "P", de la marca de tiempo actual 
+     * y un valor aleatorio
+     * @return Un identificador unico
+     */
+    public static String generarID() {
+        long timestamp = System.currentTimeMillis();
+        int random = (int) (Math.random() * 1000);
+        return "P" + timestamp + "_" + random;
+    }
 }
