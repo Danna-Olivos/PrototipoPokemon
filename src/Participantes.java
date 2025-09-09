@@ -2,16 +2,19 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Participantes{
     
     private static String archivo = "participantes.csv";  
-    private static String encabezado = "nombre, apellidoP, apellidoM, fecha, edad, correo, numCuenta, facultad, carrera, pokemonCuenta";
+    private static String encabezado = "nombre, apellidoP, apellidoM, fecha, edad, sexo, telefonos, correo, numCuenta, facultad, carrera, pokemonCuenta";
     private String nombre;
     private String apellidoP;
     private String apellidoM;  
     private int birthdate;
     private int edad;
+    private String sexo;
+    private int[] telefonos;
     private String[] mails;
     private int numCuenta; //esta va a ser la llave
     private String facultad;
@@ -19,7 +22,7 @@ public class Participantes{
     private Cuenta cuenta;
 
     public Participantes(String nombre, String apellidoP,String apellidoM,
-                         int birthdate, int edad, String[]mails,
+                         int birthdate, int edad, String sexo, int[] telefonos, String[]mails,
                          int numCuenta, String facultad,
                          String carrera, Cuenta cuenta){
 
@@ -28,6 +31,8 @@ public class Participantes{
         this.apellidoM = apellidoM;
         this.birthdate = birthdate;
         this.edad = edad;
+        this.sexo = sexo;
+        this.telefonos = telefonos;
         this.mails = mails;
         this.numCuenta = numCuenta;
         this.facultad = facultad;
@@ -58,6 +63,18 @@ public class Participantes{
     }
     public void setEdad(int edad){
         this.edad = edad;
+    }
+    public String getSexo(){
+        return sexo;
+    }
+    public void setSexo(String sexo){
+        this.sexo = sexo;
+    }
+    public int[] getTelefonos(){
+        return telefonos;
+    }
+    public void setTelefonos(int[] telefonos){
+        this.telefonos = telefonos;
     }
     public String[] getMails(){
         return mails;
@@ -96,29 +113,16 @@ public class Participantes{
         this.cuenta = cuenta;
     }
 
-    @Override
-    public String toString() {
-        return "Participantes{" +
-                "nombre='" + nombre + '\'' +
-                ", apellidoP='" + apellidoP + '\'' +
-                ", apellidoM='" + apellidoM + '\'' +
-                ", birthdate=" + birthdate +
-                ", edad=" + edad +
-                ", mails=" + Arrays.toString(mails) +
-                ", numCuenta=" + numCuenta +
-                ", facultad='" + facultad + '\'' +
-                ", carrera='" + carrera + '\'' +
-                ", cuenta=" + cuenta.getLlaveCodigo() +
-                '}';
-    }
-
     public String toCSV() {
+        String telefonosStr = Arrays.stream(telefonos)
+                               .mapToObj(String::valueOf)
+                               .collect(Collectors.joining("/"));
         // Convertir array de correos a strings con ;
-        String correosStr = String.join(";", mails);
+        String correosStr = String.join("/", mails);
         // obtenemos la llave de la cuenta para guardarla en el archivo
         String cuentaLlave = (cuenta != null) ? cuenta.getLlaveCodigo() : "";
-        return String.format("%s,%s,%s,%d,%d,%s,%d,%s,%s,%s",
-                nombre, apellidoP, apellidoM, birthdate, edad, 
+        return String.format("%s,%s,%s,%d,%d,%s,%s,%s,%d,%s,%s,%s",
+                nombre, apellidoP, apellidoM, birthdate, edad, sexo, telefonosStr,
                 correosStr, numCuenta, facultad, carrera, cuentaLlave);
     }
 
@@ -172,7 +176,7 @@ public class Participantes{
         try {
             String[] partes = linea.split(",");
             
-            if (partes.length < 10) {
+            if (partes.length < 12) {
                 System.err.println("Línea CSV incompleta: " + linea);
                 return null;
             }
@@ -182,20 +186,23 @@ public class Participantes{
             String apellidoM = partes[2].trim();
             int birthdate = Integer.parseInt(partes[3].trim());
             int edad = Integer.parseInt(partes[4].trim());
-            
+            String sexo = partes[5].trim();
+            //Parsear telefonos a arreglos
+            String[] telefonosStr = partes[6].trim().split("/");
+            int[] telefonos = Arrays.stream(telefonosStr).map(String::trim).mapToInt(Integer::parseInt).toArray();
             // Parsear correos a arreglos
-            String[] mails = partes[5].trim().split(";");
+            String[] mails = partes[7].trim().split("/");
             
-            int numCuenta = Integer.parseInt(partes[6].trim());
-            String facultad = partes[7].trim();
-            String carrera = partes[8].trim();
-            String cuentaLlave = partes[9].trim();
+            int numCuenta = Integer.parseInt(partes[8].trim());
+            String facultad = partes[9].trim();
+            String carrera = partes[10].trim();
+            String cuentaLlave = partes[11].trim();
             Cuenta cuenta = null;
             if(!cuentaLlave.isEmpty()){
                 cuenta = Cuenta.consultarCuentaI(cuentaLlave);
             }
             return new Participantes(nombre, apellidoP, apellidoM, birthdate, 
-                                   edad, mails, numCuenta, facultad, carrera, cuenta);
+                                   edad,sexo,telefonos, mails, numCuenta, facultad, carrera, cuenta);
             
         } catch (Exception e) {
             System.err.println("Error al parsear línea CSV: " + linea);
