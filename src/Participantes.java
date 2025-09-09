@@ -136,14 +136,47 @@ public class Participantes{
             if (file.length() == 0) {
                 out.println(encabezado);
             }
-            
-            out.println(p.toCSV());
+            if(existeNumCuenta(p.getNumDeCuenta())){
+                System.err.println("El participante que quiere agregar ya exsite");
+            }else{
+                out.println(p.toCSV());
+            }
             
         } catch (IOException e) {
             System.err.println("Error al agregar participante: " + e.getMessage());
         }
     }
-
+    // Método para verificar si un número de cuenta ya existe
+    private static boolean existeNumCuenta(int numCuenta) {
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            boolean primeraLinea = true;
+            
+            while ((linea = br.readLine()) != null) {
+                if (primeraLinea) {
+                    primeraLinea = false;
+                    continue; 
+                }
+                
+                // Extraer el número de cuenta de la línea CSV
+                String[] partes = linea.split(",");
+                if (partes.length >= 12) { 
+                    try {
+                        int numCuentaActual = Integer.parseInt(partes[8].trim()); 
+                        if (numCuentaActual == numCuenta) {
+                            return true; 
+                        }
+                    } catch (NumberFormatException e) {
+                        System.err.println("Error al parsear número de cuenta: " + partes[8]);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error al verificar duplicados: " + e.getMessage());
+        }
+        
+        return false;
+    }
     // Método para leer todos los participantes del archivo
     public static List<Participantes> leerParticipantes() {
         List<Participantes> participantes = new ArrayList<>();
