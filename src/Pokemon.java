@@ -9,7 +9,6 @@ import java.util.List;
 
 public class Pokemon {
 
-    private static String archivo = "pokemon.csv";
     private static String encabezado = "idPokemon,nombre,especie,tipo,cp,peso,sexo,esShiny";
     private String idPokemon;
     private String nombre;
@@ -120,7 +119,7 @@ public class Pokemon {
 
     public static String consultarPokemon(String idPokemon) {
         File archivo = new File("pokemon.csv");
-        if (!archivo.exists()) {
+        if (!archivo.exists() || archivo.length() == 0) {
             System.out.println("Aún no hay pokemons almacenados");
             return null;
         }
@@ -228,6 +227,9 @@ public class Pokemon {
 
     
 }
+
+
+
 
 
 
