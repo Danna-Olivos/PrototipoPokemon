@@ -1,15 +1,47 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * La clase <code>Cuenta</code> modela una cuenta de entrenador de Pokémon Go
+ * que se almacena en un archivo CSV. 
+ * 
+ * Cada cuenta tiene un código único de entrenador (la llave), un username,
+ * un nivel y un equipo.
+ */
 public class Cuenta{
-
+    /**
+     * Nombre del archivo CSV donde se almacenan las cuentas.
+     */
     private static String archivo = "cuentas.csv";
+    /**
+     * Encabezado del archivo CSV.
+     */
     private static String encabezado = "códigoEntrenador,username,nivel,equipo";
+    /**
+     * Código de entrenador (llave de la cuenta).
+     */
     private String llaveCodigo;
+    /**
+     * Nombre de usuario asociado a la cuenta.
+     */
     private String username;
+    /**
+     * Nivel del entrenador.
+     */
     private int nivel;
+    /**
+     * Equipo del entrenador (sabiduría, instinto o valor).
+     */
     private String equipo;
 
+    /**
+     * Constructor para la clase <code>Cuenta</code>.
+     *
+     * @param llaveCodigo código de entrenador
+     * @param username nombre de usuario
+     * @param nivel nivel de entrenador
+     * @param equipo equipo de entrenador
+     */
     public Cuenta(String llaveCodigo, String username, int nivel, String equipo){
         this.llaveCodigo = llaveCodigo;
         this.username = username;
@@ -17,30 +49,35 @@ public class Cuenta{
         this.equipo = equipo;
     }
 
+    /** @return el código de entrenador de la cuenta */
     public String getLlaveCodigo(){
         return llaveCodigo;
     }
+    /** @param llaveCodigo el nuevo código de entrenador */
     public void setLlaveCodigo(String llaveCodigo){
         this.llaveCodigo = llaveCodigo;
     }
-
+    /** @return el username de la cuenta */
     public String getUsername(){
         return username;
     }
+    /** @param username el nuevo username */
     public void setUsername(String username){
         this.username = username;
     }
-
+    /** @return el nivel de la cuenta */
     public int getNivel(){
         return nivel;
     }
+    /** @param nivel el nuevo nivel de la cuenta */
     public void setNivel(int nivel){
         this.nivel = nivel;
     }
-
+    /** @return el equipo de la cuenta */
     public String getEquipo(){
         return equipo;
     }
+    /** @param equipo el nuevo equipo de la cuenta */
     public void setEquipo(String equipo){
         this.equipo = equipo;
     }
