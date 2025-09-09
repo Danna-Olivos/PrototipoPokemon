@@ -4,7 +4,7 @@ import java.util.*;
 public class Cuenta{
 
     private static String archivo = "cuentas.csv";
-    private static String encabezado = "códigoEntreandor,username,nivel,equipo";
+    private static String encabezado = "códigoEntrenador,username,nivel,equipo";
     private String llaveCodigo;
     private String username;
     private int nivel;
@@ -166,7 +166,7 @@ public class Cuenta{
             }
 
             if(!encontrada){
-                System.out.println("Esa cuenta ni siquiera estaba reistrada.");
+                System.out.println("Esa cuenta ni siquiera estaba registrada.");
                 return;
             }
 
