@@ -10,10 +10,6 @@ import java.util.*;
  */
 public class Cuenta{
     /**
-     * Nombre del archivo CSV donde se almacenan las cuentas.
-     */
-    private static String archivo = "cuentas.csv";
-    /**
      * Encabezado del archivo CSV.
      */
     private static String encabezado = "códigoEntrenador,username,nivel,equipo";
@@ -53,40 +49,59 @@ public class Cuenta{
     public String getLlaveCodigo(){
         return llaveCodigo;
     }
+
     /** @param llaveCodigo el nuevo código de entrenador */
     public void setLlaveCodigo(String llaveCodigo){
         this.llaveCodigo = llaveCodigo;
     }
+
     /** @return el username de la cuenta */
     public String getUsername(){
         return username;
     }
+
     /** @param username el nuevo username */
     public void setUsername(String username){
         this.username = username;
     }
+
     /** @return el nivel de la cuenta */
     public int getNivel(){
         return nivel;
     }
+
     /** @param nivel el nuevo nivel de la cuenta */
     public void setNivel(int nivel){
         this.nivel = nivel;
     }
+
     /** @return el equipo de la cuenta */
     public String getEquipo(){
         return equipo;
     }
+
     /** @param equipo el nuevo equipo de la cuenta */
     public void setEquipo(String equipo){
         this.equipo = equipo;
     }
 
+    /**
+     * Convierte la cuenta en una representación para el formato CSV.
+     * 
+     * @return una cadena que tiene sus campos separados por una coma.
+     */
     @Override
     public String toString(){
         return llaveCodigo + "," + username + "," + nivel + "," + equipo;
     }
 
+    /**
+     * Agrega una cuenta al archivo CSV. 
+     * Si el archivo no existe, lo crea con el encabezado.
+     * Si ya existe una cuenta con la misma llave, no se agrega.
+     *
+     * @param c la cuenta a agregar
+     */
     public static void agregarCuenta(Cuenta c){
         File archivo = new File("cuentas.csv");
         boolean yaExiste = archivo.exists();
@@ -110,6 +125,12 @@ public class Cuenta{
         }
     }
 
+    /**
+     * Método auxiliar que busca una cuenta en el archivo CSV por medio de su llave.
+     *
+     * @param llaveCodigo el código del entrenador a buscar.
+     * @return una cadena con el encabezado y los datos de la cuenta, <code>null</code> si no se encontró al entrenador.
+     */
     private static String buscarCuentaPorLlave(String llaveCodigo) {
         File archivo = new File("cuentas.csv");
         if(!archivo.exists()){
@@ -133,6 +154,12 @@ public class Cuenta{
         return null;
     }
     
+    /**
+     * Consulta una cuenta por su código de entrenador.
+     *
+     * @param llaveCodigo el código de entrenador
+     * @return la información de la cuenta en formato CSV, <code>null</code> si no se encontró al entrenador.
+     */
     public static String consultarCuenta(String llaveCodigo){
         String resultado = buscarCuentaPorLlave(llaveCodigo);
         if (resultado == null) {
@@ -141,6 +168,12 @@ public class Cuenta{
         return resultado;
     }
 
+    /**
+     * Edita los datos de una cuenta existente en el archivo CSV.
+     * Si la cuenta no existe, no se realizan cambios.
+     *
+     * @param c la cuenta con los datos actualizados
+     */
     public static void editarCuenta(Cuenta c){
         File archivo = new File("cuentas.csv");
         if(!archivo.exists()){
@@ -148,7 +181,7 @@ public class Cuenta{
             return;
         }
 
-        List<String> listaLineas = new ArrayList<>(); // la creamos pq cuando tendremos q volver a escribir todo el csv
+        List<String> listaLineas = new ArrayList<>(); // la creamos porque cuando tendremos que volver a escribir todo el csv
 
         try (FileReader fr = new FileReader(archivo);
             BufferedReader br = new BufferedReader(fr)){
@@ -179,6 +212,12 @@ public class Cuenta{
         }
     } 
 
+    /**
+     * Elimina una cuenta del archivo CSV por el código de entrenador.
+     * Si no existe, se muestra un mensaje y no se modifica el archivo.
+     *
+     * @param c la cuenta a eliminar
+     */
     public static void eliminarCuenta(Cuenta c){
         File archivo = new File("cuentas.csv");
         if(!archivo.exists()){
@@ -223,8 +262,4 @@ public class Cuenta{
             e.printStackTrace();
         }
     }
-
-
-
-
 }
