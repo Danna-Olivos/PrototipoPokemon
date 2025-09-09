@@ -54,7 +54,7 @@ public class Cuenta{
         File archivo = new File("cuentas.csv");
         boolean yaExiste = archivo.exists();
 
-        if(yaExiste && (consultarCuenta(c.getLlaveCodigo()) != null)){
+        if(yaExiste && (buscarCuentaPorLlave(c.getLlaveCodigo()) != null)){
             System.out.println("Esa cuenta ya está registrada");
             return;
         }
@@ -73,7 +73,7 @@ public class Cuenta{
         }
     }
 
-    public static String consultarCuenta(String llaveCodigo){
+    private static String buscarCuentaPorLlave(String llaveCodigo) {
         File archivo = new File("cuentas.csv");
         if(!archivo.exists()){
             System.out.println("Aún no hay cuentas almacenadas D:");
@@ -93,8 +93,15 @@ public class Cuenta{
             System.out.println("Hubo un error u.u");
             e.printStackTrace();
         }
-        System.out.println("No se encontró una cuenta con la llave " + llaveCodigo);
         return null;
+    }
+    
+    public static String consultarCuenta(String llaveCodigo){
+        String resultado = buscarCuentaPorLlave(llaveCodigo);
+        if (resultado == null) {
+            System.out.println("No se encontró una cuenta con la llave " + llaveCodigo);
+        }
+        return resultado;
     }
 
     public static void editarCuenta(Cuenta c){
