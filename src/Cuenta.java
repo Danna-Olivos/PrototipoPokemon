@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 
+
 /**
  * La clase <code>Cuenta</code> modela una cuenta de entrenador de Pokémon Go
  * y la almacena en un archivo CSV. 
@@ -262,4 +263,46 @@ public class Cuenta{
             e.printStackTrace();
         }
     }
+
+    public static Cuenta consultarCuentaI(String llaveCodigo) {
+        File archivoCuentas = new File("cuentas.csv");
+        if (!archivoCuentas.exists()) {
+            System.out.println("Aún no hay cuentas almacenadas D:");
+            return null;
+        }
+
+        try (FileReader fw = new FileReader(archivoCuentas);
+             BufferedReader br = new BufferedReader(fw)) {
+            
+            // Leer y descartar el encabezado
+            br.readLine();
+            
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] partes = linea.split(",");
+                if (partes.length >= 4) {
+                    String llaveActual = partes[0].trim();
+                    if (llaveActual.equals(llaveCodigo)) {
+                        // Crear objeto Cuenta con los datos encontrados
+                        String username = partes[1].trim();
+                        int nivel = Integer.parseInt(partes[2].trim());
+                        String equipo = partes[3].trim();
+                        
+                        return new Cuenta(llaveActual, username, nivel, equipo);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Hubo un error u.u");
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            System.out.println("Error en formato de número en la cuenta: " + e.getMessage());
+        }
+        
+        return null; // no se encontró la cuenta
+    }
+
+
+
+
 }
