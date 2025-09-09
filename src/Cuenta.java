@@ -140,11 +140,11 @@ public class Cuenta{
 
         try (FileReader fr = new FileReader(archivo);
             BufferedReader br = new BufferedReader(fr)){
-            String linea = br.readLine(); // primera linea leida: el encabezado
+            String linea = br.readLine();
             while((linea = br.readLine()) != null){
                 String llaveActual = linea.split(",")[0];
                 if(llaveActual.equals(llaveCodigo)){
-                    return encabezado + "\n" + linea; // encontrada, se devuelve la info
+                    return encabezado + "\n" + linea; 
                 }
             }
         } catch(IOException e){
@@ -181,11 +181,11 @@ public class Cuenta{
             return;
         }
 
-        List<String> listaLineas = new ArrayList<>(); // la creamos porque cuando tendremos que volver a escribir todo el csv
+        List<String> listaLineas = new ArrayList<>(); 
 
         try (FileReader fr = new FileReader(archivo);
             BufferedReader br = new BufferedReader(fr)){
-            listaLineas.add(br.readLine()); // primera linea leida: el encabezado
+            listaLineas.add(br.readLine()); 
             String linea;
             while((linea = br.readLine()) != null){
                 String llaveActual = linea.split(",")[0];
@@ -225,12 +225,12 @@ public class Cuenta{
             return;
         }
 
-        List<String> listaLineas = new ArrayList<>(); // la creamos pq cuando tendremos q volver a escribir todo el csv
+        List<String> listaLineas = new ArrayList<>(); 
 
         try (FileReader fr = new FileReader(archivo);
             BufferedReader br = new BufferedReader(fr)){
             boolean encontrada = false;
-            listaLineas.add(br.readLine()); // primera linea leida: el encabezado
+            listaLineas.add(br.readLine()); 
             String linea;
             while((linea = br.readLine()) != null){
                 String llaveActual = linea.split(",")[0];
