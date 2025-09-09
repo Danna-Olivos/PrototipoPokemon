@@ -199,7 +199,7 @@ public class Participantes{
      * 
      * @param numCuenta el numero de cuenta del participante
      */
-    private static boolean existeNumCuenta(int numCuenta) {
+    public static boolean existeNumCuenta(int numCuenta) {
         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
             String linea;
             boolean primeraLinea = true;

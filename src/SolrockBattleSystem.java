@@ -759,7 +759,7 @@ public class SolrockBattleSystem {
                 try {
                     numCuenta = Integer.parseInt(scanner.nextLine().trim());
                     // Verificar si ya existe
-                    if (Participantes.buscarPorNumCuenta(numCuenta) != null) {
+                    if (Participantes.existeNumCuenta(numCuenta)) {
                         System.out.println("Error: Este número de cuenta ya está registrado.");
                     } else {
                         break;
