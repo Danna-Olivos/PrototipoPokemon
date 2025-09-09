@@ -3,7 +3,7 @@ import java.util.*;
 
 /**
  * La clase <code>Cuenta</code> modela una cuenta de entrenador de Pokémon Go
- * que se almacena en un archivo CSV. 
+ * y la almacena en un archivo CSV. 
  * 
  * Cada cuenta tiene un código único de entrenador (la llave), un username,
  * un nivel y un equipo.
@@ -88,7 +88,7 @@ public class Cuenta{
     /**
      * Convierte la cuenta en una representación para el formato CSV.
      * 
-     * @return una cadena que tiene sus campos separados por una coma.
+     * @return una cadena que tiene sus campos separados por comas.
      */
     @Override
     public String toString(){
